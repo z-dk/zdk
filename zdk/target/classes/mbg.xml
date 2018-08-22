@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+  <context id="context1">
+  <commentGenerator>
+  		<property name="suppressAllComments" value="true"/>
+  	</commentGenerator>
+    <jdbcConnection 
+    	connectionURL="jdbc:mysql://localhost:3306/zdk" 
+    	driverClass="com.mysql.jdbc.Driver" 
+    	password="1111" userId="root" />
+    <javaTypeResolver>
+    	<property name="forceBigDecimals" value="false"/>
+    </javaTypeResolver>
+    <javaModelGenerator targetPackage="zdk.bean" targetProject="zdk" />
+    <sqlMapGenerator targetPackage="mapper" targetProject="zdk" />
+    <javaClientGenerator targetPackage="zdk.dao" targetProject="zdk" type="XMLMAPPER" />
+    <table schema="zdk" tableName="visitor_msg" domainObjectName="Message">
+      <!-- <columnOverride column="" property="???" /> -->
+      <generatedKey column="id" sqlStatement="mysql" identity="true"/>
+    </table>
+  </context>
+</generatorConfiguration>
