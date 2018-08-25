@@ -5,17 +5,30 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keyword" content="朱登奎，个人主页，个人网站" />
 	<%
 		pageContext.setAttribute("APP_PATH", request.getContextPath());
 	%>
 	<link href="${APP_PATH}/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
 	<script type="text/javascript" src="${APP_PATH}/static/js/jquery-3.3.1.js"></script>
 	<script src="${APP_PATH}/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+	<script src="${APP_PATH}/static/js/moment.js"></script>
 	<style>
 		footer{
 			height:60px;
 			text-align:center;
 			background-color:#e7e7e7;
+		}
+		p{
+			font-weight:700;
+			font-size:100%;
+		}
+		#day{
+			font-weight:900;
+			font-size:200%;
+		}
+		a{
+			color:black;
 		}
 	</style>
 	<link rel="icon" href="${APP_PATH }/static/images/bitbug_favicon.ico" type="image/x-icon"/>
@@ -24,55 +37,65 @@
 <body>
 	<%@ include file="header.jsp" %>
 	<div class="container">
-		<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+		<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" style="">
 			<table>
 				<tr>
-					<td></td>
+					<td>
+						<p>读万卷书不如行万里<a href="first.jsp">路</a></p>
+						<p>行万里<a href="${APP_PATH }/admin/toadminlogin">路</a>不如阅人无数</p><br />
+					</td>
 				</tr>
 				<tr>
 					<td align="center">星期<span id="week"></span></td>
 				</tr>
 				<tr>
-					<td align="center"><p style="font-weight:900;font-size:200%;"></p></td>
+					<td align="center"><p id="day"></p></td>
 				</tr>
 				<tr>
-					<td><span id="year"></span>.<span id="month"></span></td>
+					<td align="center"><span id="year"></span>.<span id="month"></span></td>
+				</tr>
+				<tr>
+					<td align="center">
+						<span id="time"></span>
+					</td>
 				</tr>
 			</table>
 		</div>
 		<div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
-			
+			<div class="panel panel-success">
+				<div class="panel-heading">每日文章推荐</div>
+				<div class="panel-body">
+					一切都还在开发中。。。
+				</div>
+			</div>
 		</div>
 	</div>
 	<footer class="footer navbar-fixed-bottom">
 		<div class="container">
-			<p class="credits">zhelishiyejiao</p>
+			<p class="credits"><a href="http://www.miitbeian.gov.cn/">豫ICP备18030693号</a></p>
+			<script type="text/javascript">
+				var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+				document.write(unescape("%3Cspan id='cnzz_stat_icon_1274548078'%3E%3C/span%3E%3Cscript src='" 
+						+ cnzz_protocol 
+						+ "s19.cnzz.com/z_stat.php%3Fid%3D1274548078%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+			</script>
 		</div>
 	</footer>
 	<script type="text/javascript">
 		$(function(){
+			moment.locale("zh-cn", {
+			    weekdays : ["日", "一", "二", "三", "四", "五", "六"]
+			});
 			var date = new Date();
-			var week;
-			switch(date.getDay()){
-			case 0:week="日"
-				break;
-			case 1:week="一"
-				break;
-			case 2:week="二"
-				break;
-			case 3:week="三"
-				break;
-			case 4:week="四"
-				break;
-			case 5:week="五"
-				break;
-			case 6:week="六"
-				break;
-			}
+			var dateTime = moment(date);
+			var week = dateTime.format("dddd");
+			var month = dateTime.format("MM");
+			var year = dateTime.format("YYYY");
+			
 			$("#week").text(week);
-			$("table p").text(date.getDate());
-			$("#year").text(date.getFullYear());
-			$("#month").text(date.getMonth());
+			$("#day").text(date.getDate());
+			$("#year").text(year);
+			$("#month").text(month);
 		})
 		function addFavorite() {
 	        var url = window.location;
@@ -93,5 +116,6 @@
 	        }
 	    }
 	</script>
+	
 </body>
 </html>

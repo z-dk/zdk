@@ -9,6 +9,8 @@ public class Message {
 
     private String mInfo;
 
+    private Boolean status;
+
     private Date dateTime;
 
     public Integer getmId() {
@@ -33,6 +35,14 @@ public class Message {
 
     public void setmInfo(String mInfo) {
         this.mInfo = mInfo;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
     public Date getDateTime() {

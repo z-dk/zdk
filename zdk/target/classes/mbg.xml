@@ -13,11 +13,11 @@
     	<property name="forceBigDecimals" value="false"/>
     </javaTypeResolver>
     <javaModelGenerator targetPackage="zdk.bean" targetProject="zdk" />
-    <sqlMapGenerator targetPackage="mapper" targetProject="zdk" />
+    <sqlMapGenerator targetPackage="mapper" targetProject="zdk/src/main/resources" />
     <javaClientGenerator targetPackage="zdk.dao" targetProject="zdk" type="XMLMAPPER" />
     <table schema="zdk" tableName="visitor_msg" domainObjectName="Message">
       <!-- <columnOverride column="" property="???" /> -->
-      <generatedKey column="id" sqlStatement="mysql" identity="true"/>
+      <!-- <generatedKey column="id" sqlStatement="mysql" identity="true"/> -->
     </table>
   </context>
 </generatorConfiguration>

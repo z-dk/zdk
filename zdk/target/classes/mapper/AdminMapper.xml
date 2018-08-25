@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="zdk.dao.MessageMapper">
-  <resultMap id="BaseResultMap" type="zdk.bean.Message">
-    <id column="m_id" jdbcType="INTEGER" property="mId" />
-    <result column="visitor" jdbcType="VARCHAR" property="visitor" />
-    <result column="m_info" jdbcType="VARCHAR" property="mInfo" />
-    <result column="status" jdbcType="BIT" property="status" />
-    <result column="date_time" jdbcType="TIMESTAMP" property="dateTime" />
+<mapper namespace="zdk.dao.AdminMapper">
+  <resultMap id="BaseResultMap" type="zdk.bean.Admin">
+    <id column="ad_id" jdbcType="INTEGER" property="adId" />
+    <result column="ad_name" jdbcType="VARCHAR" property="adName" />
+    <result column="ad_password" jdbcType="VARCHAR" property="adPassword" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,15 +65,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    m_id, visitor, m_info, status, date_time
+    ad_id, ad_name, ad_password
   </sql>
-  <select id="selectByExample" parameterType="zdk.bean.MessageExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="zdk.bean.AdminExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from visitor_msg
+    from admin
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -86,85 +84,73 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from visitor_msg
-    where m_id = #{mId,jdbcType=INTEGER}
+    from admin
+    where ad_id = #{adId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByAdName" parameterType="string" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from admin
+    where ad_name = #{adName,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from visitor_msg
-    where m_id = #{mId,jdbcType=INTEGER}
+    delete from admin
+    where ad_id = #{adId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="zdk.bean.MessageExample">
-    delete from visitor_msg
+  <delete id="deleteByExample" parameterType="zdk.bean.AdminExample">
+    delete from admin
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="zdk.bean.Message">
-    insert into visitor_msg (m_id, visitor, m_info, 
-      status, date_time)
-    values (#{mId,jdbcType=INTEGER}, #{visitor,jdbcType=VARCHAR}, #{mInfo,jdbcType=VARCHAR}, 
-      #{status,jdbcType=BIT}, #{dateTime,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="zdk.bean.Admin">
+    insert into admin (ad_id, ad_name, ad_password
+      )
+    values (#{adId,jdbcType=INTEGER}, #{adName,jdbcType=VARCHAR}, #{adPassword,jdbcType=VARCHAR}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="zdk.bean.Message">
-    insert into visitor_msg
+  <insert id="insertSelective" parameterType="zdk.bean.Admin">
+    insert into admin
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="mId != null">
-        m_id,
+      <if test="adId != null">
+        ad_id,
       </if>
-      <if test="visitor != null">
-        visitor,
+      <if test="adName != null">
+        ad_name,
       </if>
-      <if test="mInfo != null">
-        m_info,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="dateTime != null">
-        date_time,
+      <if test="adPassword != null">
+        ad_password,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="mId != null">
-        #{mId,jdbcType=INTEGER},
+      <if test="adId != null">
+        #{adId,jdbcType=INTEGER},
       </if>
-      <if test="visitor != null">
-        #{visitor,jdbcType=VARCHAR},
+      <if test="adName != null">
+        #{adName,jdbcType=VARCHAR},
       </if>
-      <if test="mInfo != null">
-        #{mInfo,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=BIT},
-      </if>
-      <if test="dateTime != null">
-        #{dateTime,jdbcType=TIMESTAMP},
+      <if test="adPassword != null">
+        #{adPassword,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="zdk.bean.MessageExample" resultType="java.lang.Long">
-    select count(*) from visitor_msg
+  <select id="countByExample" parameterType="zdk.bean.AdminExample" resultType="java.lang.Long">
+    select count(*) from admin
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update visitor_msg
+    update admin
     <set>
-      <if test="record.mId != null">
-        m_id = #{record.mId,jdbcType=INTEGER},
+      <if test="record.adId != null">
+        ad_id = #{record.adId,jdbcType=INTEGER},
       </if>
-      <if test="record.visitor != null">
-        visitor = #{record.visitor,jdbcType=VARCHAR},
+      <if test="record.adName != null">
+        ad_name = #{record.adName,jdbcType=VARCHAR},
       </if>
-      <if test="record.mInfo != null">
-        m_info = #{record.mInfo,jdbcType=VARCHAR},
-      </if>
-      <if test="record.status != null">
-        status = #{record.status,jdbcType=BIT},
-      </if>
-      <if test="record.dateTime != null">
-        date_time = #{record.dateTime,jdbcType=TIMESTAMP},
+      <if test="record.adPassword != null">
+        ad_password = #{record.adPassword,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -172,40 +158,30 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update visitor_msg
-    set m_id = #{record.mId,jdbcType=INTEGER},
-      visitor = #{record.visitor,jdbcType=VARCHAR},
-      m_info = #{record.mInfo,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=BIT},
-      date_time = #{record.dateTime,jdbcType=TIMESTAMP}
+    update admin
+    set ad_id = #{record.adId,jdbcType=INTEGER},
+      ad_name = #{record.adName,jdbcType=VARCHAR},
+      ad_password = #{record.adPassword,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="zdk.bean.Message">
-    update visitor_msg
+  <update id="updateByPrimaryKeySelective" parameterType="zdk.bean.Admin">
+    update admin
     <set>
-      <if test="visitor != null">
-        visitor = #{visitor,jdbcType=VARCHAR},
+      <if test="adName != null">
+        ad_name = #{adName,jdbcType=VARCHAR},
       </if>
-      <if test="mInfo != null">
-        m_info = #{mInfo,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=BIT},
-      </if>
-      <if test="dateTime != null">
-        date_time = #{dateTime,jdbcType=TIMESTAMP},
+      <if test="adPassword != null">
+        ad_password = #{adPassword,jdbcType=VARCHAR},
       </if>
     </set>
-    where m_id = #{mId,jdbcType=INTEGER}
+    where ad_id = #{adId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="zdk.bean.Message">
-    update visitor_msg
-    set visitor = #{visitor,jdbcType=VARCHAR},
-      m_info = #{mInfo,jdbcType=VARCHAR},
-      status = #{status,jdbcType=BIT},
-      date_time = #{dateTime,jdbcType=TIMESTAMP}
-    where m_id = #{mId,jdbcType=INTEGER}
+  <update id="updateByPrimaryKey" parameterType="zdk.bean.Admin">
+    update admin
+    set ad_name = #{adName,jdbcType=VARCHAR},
+      ad_password = #{adPassword,jdbcType=VARCHAR}
+    where ad_id = #{adId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -28,9 +28,9 @@
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav" id="navbar">
 						<!-- 这里设置导航链接 -->
-						<li class="active"><a href="index.jsp">首页</a></li>
-						<li><a href="learning">资源链接</a></li>
-						<li><a href="tomessage">留言板</a></li>
+						<li class="active"><a href="${APP_PATH }/index.jsp">首页</a></li>
+						<li><a href="${APP_PATH }/learning">资源链接</a></li>
+						<li><a href="${APP_PATH }/tomessage">留言板</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						
