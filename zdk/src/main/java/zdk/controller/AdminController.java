@@ -1,21 +1,19 @@
 package zdk.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import zdk.bean.Admin;
 import zdk.bean.Message;
 import zdk.bean.Msg;
 import zdk.service.AdminService;
 import zdk.service.MsgService;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
@@ -45,7 +43,7 @@ public class AdminController {
 		}else if(admin.getAdPassword().equals(ad.getAdPassword())) {
 			request.getSession().setAttribute("adName",ad.getAdName());
 			request.getSession().setAttribute("adId",ad.getAdId());
-			
+
 			return Msg.success().add("admin", ad);
 		}
 		return Msg.fail();
